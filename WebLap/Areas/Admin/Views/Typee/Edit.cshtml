@@ -1,0 +1,44 @@
+﻿@model Typee
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">@ResourceWeb.CreateType</h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">@ResourceWeb.CreateType</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@ResourceWeb.CreateType</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-8 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">@ResourceWeb.CreateType</h4>
+                    <p class="card-description">@ResourceWeb.CreateType</p>
+                    <form class="forms-sample" method="post" enctype="multipart/form-data"
+                          asp-controller="Typee" asp-action="Save" role="form">
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.TypeName</label>
+                            <input asp-for="TypeName" type="text" class="form-control" placeholder="Type Name">
+                            <span asp-validation-for="TypeName" class="text-danger"></span>
+                        </div>
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="CurrentStauts" />
+
+                        <button type="submit" formmethod="post" class="btn btn-gradient-primary me-2">Save</button>
+                        <button class="btn btn-light">@ResourceWeb.Back</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

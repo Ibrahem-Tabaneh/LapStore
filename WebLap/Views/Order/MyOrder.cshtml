@@ -1,0 +1,72 @@
+﻿@model List<OrderViewModel>
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-home"></i>
+            </span> My Order
+        </h3>
+        <nav aria-label="breadcrumb">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">
+                    <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">My Order</h4>
+                    <div class="table-responsive">
+                        <table class="table" id="order-listing">
+                            <thead>
+                                <tr>
+                                    <th> FirstName </th>
+                                    <th> LastName </th>
+                                    <th> InvoiceDate </th>
+                                    <th> DelivryDate </th>
+                                    <th> TotalPrice </th>
+                                    <th> Action </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.FirstName</td>
+                                        <td> @item.LastName </td>
+                                        <td>@item.OrderDate</td>
+                                        <td>@item.EndDate </td>
+                                        <td>@item.TotalPrice </td>
+
+                                        <td><a class="btn btn-primary" asp-controller="Order" asp-action="DetailsOrder" asp-route-id="@item.OrderId">Details</a></td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- content-wrapper ends -->
+@section Scripts {
+    <!-- Custom js for this page -->
+    <script src="~/Admin/js/dashboard.js"></script>
+    <!-- End custom js for this page -->
+    <!-- Plugin js for this page -->
+    <script src="~/Admin/vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="~/Admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- Custom js for this page -->
+    <script src="~/Admin/js/data-table.js"></script>
+    <!-- End custom js for this page -->
+}

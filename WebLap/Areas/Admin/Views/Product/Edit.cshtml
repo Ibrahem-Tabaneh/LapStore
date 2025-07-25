@@ -1,0 +1,144 @@
+﻿@model Product
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">@ResourceWeb.CreateProductPage</h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">@ResourceWeb.CreateProductPage</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@ResourceWeb.CreateProductPage</li>
+            </ol>
+        </nav>
+    </div>
+    <form class="forms-sample" method="post" enctype="multipart/form-data"
+          asp-controller="Product" asp-action="Save" role="form">
+        <div class="row">
+
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">@ResourceWeb.CreateProductPage</h4>
+                        <p class="card-description">@ResourceWeb.CreateProductPage</p>
+
+                        <input asp-for="Id" type="hidden" />
+                        <input asp-for="CurrentStatus" type="hidden" />
+                        <input asp-for="ProductImg" type="hidden" />
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.ProductName</label>
+                            <input asp-for="ProductName" type="text" class="form-control" placeholder="Product Name">
+                            <span asp-validation-for="ProductName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.CategoryName</label>
+                            <select class="form-control" asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.lstCategories,"Id","CategoryName"))"></select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.TypeName</label>
+                            <select class="form-control" asp-for="TypeId" asp-items="@(new SelectList(ViewBag.lstItemTypes,"Id","TypeName"))"></select>
+                            <span asp-validation-for="TypeId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.OsName</label>
+                            <select class="form-control" asp-for="OsId" asp-items="@(new SelectList(ViewBag.lstOs,"Id","OsName"))"></select>
+                            <span asp-validation-for="OsId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.ColorName</label>
+                            <select class="form-control" asp-for="ColorId" asp-items="@(new SelectList(ViewBag.lstcolors,"Id","ColorName"))"></select>
+                            <span asp-validation-for="ColorId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.Price</label>
+                            <input asp-for="ProductPrice" type="text" class="form-control" placeholder="Product Price">
+                            <span asp-validation-for="ProductPrice" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">
+                                @ResourceWeb.Img
+                            </label>
+                            <input asp-for="ProductImg" type="file" name="Files" multiple
+                                   class="form-control" placeholder="Image"
+                                   onchange="Upload.UploadDefaultImg(event)"
+                                   accept=".jpg, .jpeg, .png, ,.gif">
+                            <span asp-validation-for="ProductImg" class="text-danger"></span>
+
+                        </div>
+
+                        <button type="submit" formmethod="post" class="btn btn-gradient-primary me-2">@ResourceWeb.Save</button>
+                        <button class="btn btn-light">@ResourceWeb.New</button>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">@ResourceWeb.CreateProductPage</h4>
+                        <p class="card-description">@ResourceWeb.CreateProductPage</p>
+
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.HardDisk</label>
+                            <input asp-for="HardDisk" type="text" class="form-control" placeholder="HardDisk">
+                            <span class="label-danger" asp-validation-for="HardDisk" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.RamSize</label>
+                            <input asp-for="RamSize" type="number" class="form-control" placeholder="RamSize">
+                            <span asp-validation-for="RamSize" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.ScreenReselution</label>
+                            <input asp-for="ScreenReselution" type="text" class="form-control" placeholder="Screen Reselution">
+                            <span asp-validation-for="ScreenReselution" class="text-danger"></span>
+                        </div>
+
+                        <span id="tbImgName"></span>
+                        <div id="tbImgSrc">
+                            <img src="/Uploads/ProductImg/@Model.ProductImg" style="width:95%; height300px;" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+
+@section Scripts
+{
+    <script>
+        var Upload = {
+            UploadDefaultImg: function (e) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    CourseMediaImgName = file.name;
+                    CourseMediaImgBase64 = reader.result.slice(reader.result.indexOf('base64,') + 7);
+                    $("#tbImgName").html(file.name)
+                    $("#tbImgSrc").html(`<img class="thumbnail" src = "${reader.result}"  style = "width: 200px;height: 300px;border-radius: 5px;border: 1px solid #d9d9d9;padding: 1px;" />`)
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}

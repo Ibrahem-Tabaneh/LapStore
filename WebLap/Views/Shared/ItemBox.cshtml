@@ -1,0 +1,26 @@
+﻿@model VwProduct
+
+<div class="product-box">
+    <div class="img-wrapper">
+        <div class="front">
+            <a asp-controller="Product" asp-action="ProductDetails" asp-route-ProductId="@Model.Id">
+                <img src="~/Uploads/ProductImg/@Model.ProductImg"
+                     class="img-fluid blur-up lazyload bg-img" alt="">
+            </a>
+        </div>
+
+        <a class="add-button" asp-controller="Order" asp-action="AddToCart" asp-route-ProductId="@Model.Id">
+            add to
+            cart
+        </a>
+    </div>
+    <div class="product-detail">
+        <div class="rating">
+            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+        </div>
+
+        <h6>@Model.ProductName</h6>
+
+        <h4>@Model.ProductPrice</h4>
+    </div>
+</div>

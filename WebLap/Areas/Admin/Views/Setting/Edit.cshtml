@@ -1,0 +1,129 @@
+﻿@model Setting
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">@ResourceWeb.EditSettingPage</h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">@ResourceWeb.EditSettingPage</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@ResourceWeb.EditSettingPage</li>
+            </ol>
+        </nav>
+    </div>
+    <form class="forms-sample" method="post" enctype="multipart/form-data"
+          asp-controller="Setting" asp-action="Save" role="form">
+        <div class="row">
+
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">@ResourceWeb.EditSettingPage</h4>
+                        <p class="card-description">@ResourceWeb.EditSettingPage</p>
+
+                        <input asp-for="Id" type="hidden" />
+                      <input asp-for="Logo" type="hidden" />
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.WebsiteName</label>
+                            <input asp-for="WebsiteName" type="text" class="form-control" placeholder="WebsiteName">
+                            <span asp-validation-for="WebsiteName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.WebsiteDesc</label>
+                            <input asp-for="WebsiteDescription" type="text" class="form-control" placeholder="WebsiteDescription">
+                            <span asp-validation-for="WebsiteDescription" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.InstgramLink</label>
+                            <input asp-for="InstgramLink" type="text" class="form-control" placeholder="Instgram Link">
+                            <span asp-validation-for="InstgramLink" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.TwitterLink</label>
+                            <input asp-for="TwitterLink" type="text" class="form-control" placeholder="Twitter Link">
+                            <span asp-validation-for="TwitterLink" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.Address</label>
+                            <input asp-for="Address" type="text" class="form-control" placeholder="Address">
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                       
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.Email</label>
+                            <input asp-for="Email" type="text" class="form-control" placeholder="Email">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">ContactNumber</label>
+                            <input asp-for="ContactNumber" type="text" class="form-control" placeholder="Email">
+                            <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">
+                                @ResourceWeb.Img
+                            </label>
+                            <input asp-for="Logo" type="file" name="Files" multiple
+                                   class="form-control" placeholder="Image"
+                                   onchange="Upload.UploadDefaultImg(event)"
+                                   accept=".jpg, .jpeg, .png, ,.gif">
+                            <span asp-validation-for="Logo" class="text-danger"></span>
+
+                        </div>
+
+                        <button type="submit" formmethod="post" class="btn btn-gradient-primary me-2">@ResourceWeb.Save</button>
+                        <button class="btn btn-light">@ResourceWeb.New</button>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+
+                    <span id="tbImgName"></span>
+                    <div id="tbImgSrc">
+                        <img src="/Uploads/LogoImg/@Model.Logo" style="width:95%; height300px;" />
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+    </form>
+</div>
+
+
+@section Scripts
+{
+    <script>
+        var Upload = {
+            UploadDefaultImg: function (e) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    CourseMediaImgName = file.name;
+                    CourseMediaImgBase64 = reader.result.slice(reader.result.indexOf('base64,') + 7);
+                    $("#tbImgName").html(file.name)
+                    $("#tbImgSrc").html(`<img class="thumbnail" src = "${reader.result}"  style = "width: 200px;height: 300px;border-radius: 5px;border: 1px solid #d9d9d9;padding: 1px;" />`)
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

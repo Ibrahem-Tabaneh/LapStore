@@ -1,0 +1,95 @@
+﻿@model Slider
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">@ResourceWeb.CreateSliderPage</h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">@ResourceWeb.CreateSliderPage</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@ResourceWeb.CreateSliderPage</li>
+            </ol>
+        </nav>
+    </div>
+    <form class="forms-sample" method="post" enctype="multipart/form-data"
+          asp-controller="Slider" asp-action="Save" role="form">
+        <div class="row">
+
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">@ResourceWeb.CreateSliderPage</h4>
+                        <p class="card-description">@ResourceWeb.CreateSliderPage</p>
+
+                        <input asp-for="Id" type="hidden" />
+                        <input asp-for="CurrentStatus" type="hidden" />
+                        <input asp-for="SliderImg" type="hidden" />
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">@ResourceWeb.Tittle</label>
+                            <input asp-for="SliderName" type="text" class="form-control" placeholder="Slider Name">
+                            <span asp-validation-for="SliderName" class="text-danger"></span>
+                        </div>
+
+                      
+
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">
+                                @ResourceWeb.Img
+                            </label>
+                            <input asp-for="SliderImg" type="file" name="Files" multiple
+                                   class="form-control" placeholder="Image"
+                                   onchange="Upload.UploadDefaultImg(event)"
+                                   accept=".jpg, .jpeg, .png, ,.gif">
+                            <span asp-validation-for="SliderImg" class="text-danger"></span>
+
+                        </div>
+
+                        <button type="submit" formmethod="post" class="btn btn-gradient-primary me-2">@ResourceWeb.Save</button>
+                        <button class="btn btn-light">@ResourceWeb.New</button>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+
+                    <span id="tbImgName"></span>
+                    <div id="tbImgSrc">
+                        <img src="/Uploads/SliderImg/@Model.SliderImg" style="width:95%; height300px;" />
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+    </form>
+</div>
+
+
+@section Scripts
+{
+    <script>
+        var Upload = {
+            UploadDefaultImg: function (e) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    CourseMediaImgName = file.name;
+                    CourseMediaImgBase64 = reader.result.slice(reader.result.indexOf('base64,') + 7);
+                    $("#tbImgName").html(file.name)
+                    $("#tbImgSrc").html(`<img class="thumbnail" src = "${reader.result}"  style = "width: 200px;height: 300px;border-radius: 5px;border: 1px solid #d9d9d9;padding: 1px;" />`)
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
