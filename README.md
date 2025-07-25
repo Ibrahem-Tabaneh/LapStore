@@ -35,6 +35,6 @@ To run the project on your local machine, please follow these steps:
  	Click on "Restore NuGet Packages" if needed ,
 	Run the project using IIS Express or Kestrel.
 
-# Data Base
+# DataBase
 source: https://drive.google.com/file/d/1pdDlBcSIp3YEfbqMiVFY5VazjhO4HQm3/view?usp=drive_link
 
